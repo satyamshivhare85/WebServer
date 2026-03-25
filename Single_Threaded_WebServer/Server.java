@@ -10,15 +10,14 @@ public class Server {
     
     public void run() throws IOException, UnknownHostException{
         int port = 8010;
-        ServerSocket socket = new ServerSocket(port); //socket===> Ip+Port
-        socket.setSoTimeout(20000);
+        ServerSocket socket = new ServerSocket(port);
+        // socket.setSoTimeout(20000);
         while(true){
             System.out.println("Server is listening on port: "+port);
-            Socket acceptedConnection = socket.accept();  //accept connection -->from client
-            System.out.println("Connected to "+acceptedConnection.getRemoteSocketAddress());//client Infor s client IP + port
-            // After accept()Client Socket  <----TCP---->  Server Socket (acceptedConnection)
-            PrintWriter toClient = new PrintWriter(acceptedConnection.getOutputStream(), true); //Data==>client
-            BufferedReader fromClient = new BufferedReader(new InputStreamReader(acceptedConnection.getInputStream()));//Recieive data from client
+            Socket acceptedConnection = socket.accept();
+            System.out.println("Connected to "+acceptedConnection.getRemoteSocketAddress());
+            PrintWriter toClient = new PrintWriter(acceptedConnection.getOutputStream(), true);
+            BufferedReader fromClient = new BufferedReader(new InputStreamReader(acceptedConnection.getInputStream()));
             toClient.println("Hello World from the server");
         }
     }
